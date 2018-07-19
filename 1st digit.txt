@@ -1,1 +1,29 @@
  printf("%d...%03d\n", (int)(pow(10, fmod(k*log10(n), 1))*100), trail);
+ OR
+ 
+ 
+#include<bits/stdc++.h>
+using namespace std;
+long long Big_mod(long long n, long long power)
+{// trailing digit
+    if(power==0) return 1;
+    long long x=Big_mod(n,power/2);
+    x=(x*x)%1000;
+    if(power%2)x=(x*n)%1000;
+    return x;
+}
+int main()
+{
+    long long n,num,power;
+    cin>>n;
+    while(n--)
+    {
+        cin>>num>>power;
+        double x=power*log10(num);
+        x=x-(int)x;
+        x=powl(10,x);
+        x=x*100;//x=leading digit 
+        printf("%d...%03lld\n",(int)x,Big_mod(num,power));
+    }
+    return 0;
+}
