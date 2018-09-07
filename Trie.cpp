@@ -55,6 +55,7 @@ int main()
     while( scanf("%d",&n)==1 )
     {
         getchar();
+        state=0;
         for(int i=0; i<n; i++)
         {
             string s;
