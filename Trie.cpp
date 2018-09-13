@@ -1,78 +1,96 @@
 // M M Mehedi Hasan
 // From BUBT
 #include<bits/stdc++.h>
-#define maxi 1020
+#define maxl 1020
 using namespace std;
 int state;
 struct node
 {
-    int cnt,length,path[300];
+    int cnt=0,length=0;
+    node* next[65];
     bool endmark;
-    void initialize()
+    node()
     {
         endmark=false;
-        memset(path,0,sizeof path);
+        for(int i=0; i<=52; i++) next[i]=NULL;
     }
-} Tree[maxi];
 
-void insert(string &s, int &len)
+} *Tree;
+
+void insertt(string s, int len)
 {
-    int curr=0;
+    node* curr=Tree;
+    int wordl=0;
     for(int i=0; i<len; i++)
     {
-        int ch= (s[i]-'A')+26;
-        if( Tree[curr].path[ch] )
+        int path=0;
+        if(s[i]>='a' &&s[i]<='z') path=( (int)s[i]-'a'); // 0 to 25
+        else path=( (int)s[i]-'A')+26; // 26 to start
+        
+        if(curr->next[path] == NULL)
         {
-            curr=Tree[curr].path[ch];
+            curr->next[path]=new node();
+            curr->length= ++wordl;
+
         }
-        else
-        {
-            Tree[curr].path[ch]= ++state;
-            Tree[state].length = Tree[curr].length+1;
-            Tree[state].initialize();
-            curr=state;
-        }
+        curr=curr->next[path];
     }
-    Tree[curr].endmark=true;
-    Tree[curr].cnt++;
+    curr->endmark=true;
+    curr->cnt++;
 }
 
-bool search(string &ss, int &len )
+bool searching(string s, int len )
 {
-    int curr=0;
+    node *curr=Tree;
+    int wordl;
     for(int i=0; i<len; i++)
     {
-        int ch=(ss[i]-'A')+26;
-        if( !Tree[curr].path[ch] ) return false;
-        curr=Tree[curr].path[ch];
+        int path=0;
+        if(s[i]>='a' &&s[i]<='z') path=( (int)s[i]-'a'); //0 to 25
+        else path=( (int)s[i]-'A')+26; // 26 to start
+        
+        if( curr->next[path] == NULL ) return false;
+        else  wordl=curr->length, curr=curr->next[path];
     }
-    return Tree[curr].endmark;
+    if(curr->endmark)
+    {
+        cout<<"Length  "<<wordl<<endl;
+        cout<<"Total  has "<<curr->cnt<<endl;
+    }
+    return curr->endmark;
 }
 
+int del(node *curr)
+{
+    for(int i=0; i<=52; i++)
+        if(curr->next[i] != NULL) del(curr->next[i]);
+    delete(curr);
+}
 int main()
 {
     int n,q;
     while( scanf("%d",&n)==1 )
     {
         getchar();
-        state=0;
+        Tree= new node();
         for(int i=0; i<n; i++)
         {
             string s;
             getline(cin,s);
             int len=(int)s.size();
-            insert(s,len);
+            insertt(s,len);
         }
-        scanf("%d",&q);
-        getchar();
+        scanf("%d ",&q);
+
         for(int i=0; i<q; i++)
         {
-            string ss;
-            getline(cin,ss);
-            int len=(int)ss.size();
-            if( search(ss,len) ) printf("Found\n");
+            string s;
+            getline(cin,s);
+            int len=(int)s.size();
+            if( searching(s,len) ) printf("Found\n");
             else printf("Not Found\n");
         }
+        del(Tree);
     }
     return 0;
 }
