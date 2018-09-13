@@ -1,14 +1,13 @@
-//M M Mehedi Hasan
-//From BUBT
-
+// M M Mehedi Hasan
+// From BUBT
 #include <bits/stdc++.h>
-#define szz 2010
+#define maxt 101000
+#define maxp 1100
 using namespace std;
-int phi[szz];
-int prefix_kmp(string &s2)
+int phi[maxp];
+void prefix_kmp(char s2[maxp], int len)
 {
     int j=0;
-    int len= (int)s2.size();
     phi[0]=0;
     for(int i=1; i<len; i++)
     {
@@ -16,14 +15,14 @@ int prefix_kmp(string &s2)
         if(s2[i] == s2[j]) j++;
         phi[i]=j;
     }
-   // for(int i=0; i<len; i++) cout<<phi[i]<<" ";
+  //  for(int i=0; i<len; i++) cout<<phi[i]<<" ";
 }
 
-bool kmp(string &s1, string &s2)
+bool kmp(char s1[maxt], char s2[maxp])
 {
-    prefix_kmp(s2);
+    int len1=(int)strlen(s1), len2= (int)strlen(s2);
+    prefix_kmp(s2,len2);
     int j=0;
-    int len1=(int)s1.size(), len2=(int)s2.size();
     for(int i=0; i<len1 && j<len2; i++)
     {
         while(j>0 && s1[i] != s2[j] ) j=phi[j-1];
@@ -34,14 +33,21 @@ bool kmp(string &s1, string &s2)
 }
 int main()
 {
-    int q;
-    string s1,s2;
-    cin>>s1>>q;
-    for(int i=0; i<q; i++)
+    int q,t;
+    scanf("%d",&t);
+    while(t--)
     {
-        cin>>s2;
-        if( kmp( s1,s2 ) ) printf("Y\n");
-        else printf("N\n");
+        char s1[maxt];
+        scanf("%s %d",s1,&q);
+    //   cout<<"S  "<<s1<<endl;
+        for(int i=0; i<q; i++)
+        {
+            char s2[maxp];
+
+            scanf("%s",s2); //cout<<"SS  "<<s2<<endl;
+            if( kmp( s1,s2 ) ) printf("y\n");
+            else printf("n\n");
+        }
     }
     return 0;
 }
