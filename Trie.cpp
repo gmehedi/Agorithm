@@ -20,8 +20,7 @@ void insert(string &s, int &len)
     int curr=0;
     for(int i=0; i<len; i++)
     {
-        int ch= (int)s[i];
-        ch=s[i]-ch+1;
+        int ch=s[i]-'A';
         if( Tree[curr].path[ch] )
         {
             curr=Tree[curr].path[ch];
@@ -43,8 +42,7 @@ bool search(string &ss, int &len )
     int curr=0;
     for(int i=0; i<len; i++)
     {
-        int ch= (int)ss[i];
-        ch=ss[i]-ch+1;
+        int ch=ss[i]-'A';
         if( !Tree[curr].path[ch] ) return false;
         curr=Tree[curr].path[ch];
     }
