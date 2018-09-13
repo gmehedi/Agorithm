@@ -6,7 +6,7 @@ using namespace std;
 int state;
 struct node
 {
-    int cnt,length,path[65];
+    int cnt,length,path[300];
     bool endmark;
     void initialize()
     {
@@ -20,7 +20,7 @@ void insert(string &s, int &len)
     int curr=0;
     for(int i=0; i<len; i++)
     {
-        int ch=s[i]-'A';
+        int ch= (s[i]-'A')+26;
         if( Tree[curr].path[ch] )
         {
             curr=Tree[curr].path[ch];
@@ -42,7 +42,7 @@ bool search(string &ss, int &len )
     int curr=0;
     for(int i=0; i<len; i++)
     {
-        int ch=ss[i]-'A';
+        int ch=(ss[i]-'A')+26;
         if( !Tree[curr].path[ch] ) return false;
         curr=Tree[curr].path[ch];
     }
