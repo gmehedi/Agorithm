@@ -20,20 +20,20 @@ struct node
 void insertt(string s, int len)
 {
     node* curr=Tree;
-    int wordl=0;
     for(int i=0; i<len; i++)
     {
         int path=0;
         if(s[i]>='a' &&s[i]<='z') path=( (int)s[i]-'a'); // 0 to 25
         else path=( (int)s[i]-'A')+26; // 26 to start
-        
+
         if(curr->next[path] == NULL)
         {
             curr->next[path]=new node();
-            curr->length= ++wordl;
+            curr=curr->next[path];
+            curr->length= i+1;
 
         }
-        curr=curr->next[path];
+        else curr=curr->next[path];
     }
     curr->endmark=true;
     curr->cnt++;
@@ -42,19 +42,18 @@ void insertt(string s, int len)
 bool searching(string s, int len )
 {
     node *curr=Tree;
-    int wordl;
     for(int i=0; i<len; i++)
     {
         int path=0;
         if(s[i]>='a' &&s[i]<='z') path=( (int)s[i]-'a'); //0 to 25
         else path=( (int)s[i]-'A')+26; // 26 to start
-        
+
         if( curr->next[path] == NULL ) return false;
-        else  wordl=curr->length, curr=curr->next[path];
+        else  curr=curr->next[path];
     }
     if(curr->endmark)
     {
-        cout<<"Length  "<<wordl<<endl;
+        cout<<"Length  "<<curr->length<<endl;
         cout<<"Total  has "<<curr->cnt<<endl;
     }
     return curr->endmark;
