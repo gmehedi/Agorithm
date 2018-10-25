@@ -1,14 +1,14 @@
 First, if p and q are not coprime, divide them on gcd(p,q)
 gcd(p,q). Fraction is finite if and only if there is integer k
-k such that q|p·bk
-q|p·bk. Since p
+k such that q|pÂ·bk
+q|pÂ·bk. Since p
 p and q are being coprime now, 
 q|b k?
 q|b k? all prime factors of q
 q are prime factors of  b
 b. Now we can do iterations 
-q=q÷gcd(b,q)
-q=q÷gcd(b,q) while 
+q=qÃ·gcd(b,q)
+q=qÃ·gcd(b,q) while 
 gcd(q,b)?1
 gcd(q,b)?1. If 
 q?1
@@ -21,7 +21,7 @@ O(nlog^2 10^18). Let's add
 b=gcd(b,q)
 b=gcd(b,q) in iterations and name iterations when 
 gcd(b,q)
-gcd(b,q) changes iterations of the first type and when it doesn't change — iterations of the second type. Iterations of second type works summary in 
+gcd(b,q) changes iterations of the first type and when it doesn't change â€” iterations of the second type. Iterations of second type works summary in 
 O(log10^18)
 O(log?10^18). Number of iterations of the first type is 
 O(log10^18)
@@ -32,3 +32,33 @@ O(log?10^18) summary. Total time complexity is
 O(nlog10^18)
 O(nlog?10^18)
 Solution
+
+#include<bits/stdc++.h>
+using namespace std;
+int main()
+{
+    long long p,q,b;
+    int n;
+    scanf("%d",&n);
+    while(n--)
+    {
+        scanf("%lld %lld %lld",&p,&q,&b);
+     //   cout<<"G  "<<gcd<<endl;
+     if(p==0) {
+			printf("Finite\n");
+			continue;
+		}
+        long long gcd=__gcd(p,q);
+        p=p/gcd,q=q/gcd;
+     // cout<<"F "<<p<<"  "<<q<<endl;
+        gcd=__gcd(q,b);
+        while( gcd !=1 )
+        {
+            while(q%gcd==0) q/=gcd;
+            gcd=__gcd(q,b);
+        }
+        if(q==1) printf("Finite\n");
+        else printf("Infinite\n");
+    }
+    return 0;
+}
