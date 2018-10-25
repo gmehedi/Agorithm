@@ -35,8 +35,7 @@ bool diakstra(int s, int d)
                 dist[v][0]=w+wf;
                 pq.push(make_pair( dist[v][0],v ));
                 //cout<<"F  "<<w+dist[v][0]<<"  "<<w<<"  "<<u<<endl;
-                pq.push(make_pair( dist[v][0]+w,u));
-
+                pq.push(make_pair( dist[v][0]+w,u)); // back in u node for 2nd path by w cost
             }
             else if( dist[v][0] != w+wf and w+wf<dist[v][1] )
             {
