@@ -47,6 +47,11 @@ void Prop(ll node, ll s, ll e)
 {
     //cout<<"E  "<<s<<"  "<<e<<"  "<<e-s+1<<"   "<<tree[node].prop<<endl;
     tree[node].sum += (e-s+1LL)*tree[node].prop;
+    if(s == e)
+    {
+        tree[node].prop=0LL;
+        return;
+    }
     tree[node*2LL].prop+=tree[node].prop;
 
     tree[(node*2LL)+1LL].prop+=tree[node].prop;
