@@ -1,4 +1,4 @@
-1st sort tha edge weight basis..
+/*1st sort tha edge weight basis..
 
 2nd take an edge and check 2 nodes of this adge are same set or not. 
 If they are in same union ignore it other wise take this adge and add it's in Mst;
@@ -7,6 +7,7 @@ res: if all node are include in set of Mst graph then we can see that our MST is
 Otherwise Impossible
 
 ......................code light oj 1041 find mst...................................
+*/
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -49,12 +50,12 @@ int transfer_and_size(int ra, int rb, int a, int b)
     if(sz[ra]>=sz[rb])
     {
         sz[ra]+=sz[rb];
-        group[ra]=group[rb];
+        group[rb]=group[ra];
     }
     else
     {
         sz[rb]+=sz[ra];
-        group[rb]=group[ra];
+        group[ra]=group[rb];
     }
 }
 
