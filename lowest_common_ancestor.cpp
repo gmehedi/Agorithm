@@ -34,7 +34,7 @@ void bfs(int s)
     }
 }
 
-void bfs()
+void bfs1()
 {
     memset(sign,true,sizeof sign);
     for(int i=1; i<=n; i++) if(sign[i]) bfs(i);
@@ -83,7 +83,7 @@ int main()
         g[u].push_back(v);
         g[v].push_back(u);
     }
-    bfs();
+    bfs1();
     //for(int i=1; i<=n; i++) cout<<"P  "<<i<<"   "<<parent[i]<<"  "<<level[i]<<endl;
     build_table();
     
