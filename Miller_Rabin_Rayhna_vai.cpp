@@ -177,9 +177,10 @@ int a[9]={2,3,5,7};
 int main()
 {
     Factor::init(300000000); // size of prime generator
+    vector<pair<ll,ll> >fact=Factor::factorG(10); // factorization of this number
+
  //  for(int i=0; i<fact.size(); i++) cout<<"T  "<<fact[i].first<<"  "<<fact[i].second<<endl;
    for(int i=0; i<4; i++) generate(a[i]);
-   vector<pair<ll,ll> >fact=Factor::factorG(10); // factorization of this number
    //cout<<v.size()<<endl;
    set<long long >:: iterator it=prime.begin();
   // cout<<v.size()<<endl;
