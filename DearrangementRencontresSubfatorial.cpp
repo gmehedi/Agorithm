@@ -84,7 +84,7 @@ int main(){
       }
 
       while( scanf("%lld%lld",&n, &k) != EOF ){
-         // cout<<"B  "<<Bionomial(n, k)<<endl;
+          Bionomial(n, k);
           if(n == -1) break;
           printf("%lld\n",Subfactorial(n,k));
       }
