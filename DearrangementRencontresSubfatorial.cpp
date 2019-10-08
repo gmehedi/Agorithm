@@ -57,7 +57,6 @@ using namespace std;
     {
         if(n == k || k == 0) return 1LL;
         if(dpb[n][k] != -1) return dpb[n][k];
-
         return dpb[n][k] = Bionomial(n-1,k-1) + ( Bionomial(n-1,k) );
     }
 
@@ -67,12 +66,9 @@ using namespace std;
         if(n == 1 && k == 0) return 0LL;
         if(dp[n][k] != -1) return dp[n][k];
 
-        if(n>1 && k == 0)
-        {
+        if(n>1 && k == 0){
             return dp[n][k] = (n-1)*( Subfactorial(n-1,0)+( Subfactorial(n-2,0)) );
         }
-
-
         return dp[n][k] = dpb[n][k] * ( Subfactorial(n-k,0) );
     }
 
@@ -80,21 +76,17 @@ using namespace std;
 int main(){
 
       ll n, k;
-      for(int i=0; i<=810; i++)
-      {
-          for(int j=0; j<=810; j++)
-          {
+      for(int i=0; i<=810; i++){
+          for(int j=0; j<=810; j++){
               dp[i][j] = -1LL;
               dpb[i][j] = -1LL;
           }
       }
 
-      while( scanf("%lld%lld",&n, &k) != EOF )
-      {
+      while( scanf("%lld%lld",&n, &k) != EOF ){
          // cout<<"B  "<<Bionomial(n, k)<<endl;
           if(n == -1) break;
           printf("%lld\n",Subfactorial(n,k));
       }
       return 0;
-
 }
